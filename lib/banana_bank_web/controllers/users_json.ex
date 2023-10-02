@@ -19,11 +19,10 @@ defmodule BananaBankWeb.UsersJSON do
 
   defp data(%User{} = user) do
     %{
-      name: user.name,
       id: user.id,
       cep: user.cep,
+      name: user.name,
       email: user.email,
-      password_hash: user.password_hash,
       update_at: user.updated_at,
       inserted_at: user.inserted_at
     }
