@@ -4,7 +4,7 @@ defmodule BananaBank.Users.Index do
   alias BananaBank.Users.User
 
   def call() do
-    from(a in User, select: a)
+    User
     |> Repo.all()
   end
 end

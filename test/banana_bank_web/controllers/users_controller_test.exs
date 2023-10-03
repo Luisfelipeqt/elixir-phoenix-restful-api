@@ -1,7 +1,4 @@
 defmodule BananaBankWeb.UsersControllerTest do
-  # Usar ConnCase para setar um banco de dados em SandBOX
-  # SandBox significa que tudo
-  # Que é feito no teste é feito automáticamente rollback depois
   alias BananaBank.Users
   alias Users.User
   use BananaBankWeb.ConnCase, async: true

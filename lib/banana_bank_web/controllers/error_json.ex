@@ -16,6 +16,17 @@ defmodule BananaBankWeb.ErrorJSON do
     }
   end
 
+
+   def error(%{status: :bad_request}) do
+    %{
+      status: :bad_request,
+      message: "You make a bad_request!"
+    }
+  end
+
+
+
+
   defp translate_errors({msg, opts}) do
     Regex.replace(~r"%{(\w+)}", msg, fn _, key ->
       opts |> Keyword.get(String.to_existing_atom(key), key) |> to_string()
