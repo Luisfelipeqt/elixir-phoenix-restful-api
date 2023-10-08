@@ -25,6 +25,11 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+# Configures Guardian Authentication
+config :banana_bank, BananaBankWeb.Auth.Guardian,
+  issuer: "banana_bank",
+  secret_key: "dPAjuD3f+WEzvpRvwPP8akAkevv8LbQKeGTa0oVVJBIW6p9ZAKU3AgNDa4MVDi+q"
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 

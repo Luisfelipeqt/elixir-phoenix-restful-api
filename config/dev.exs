@@ -5,7 +5,7 @@ config :banana_bank, BananaBank.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "banana_bank_dev",
+  database: "banana_bank_devs",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

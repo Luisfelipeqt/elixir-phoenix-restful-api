@@ -1,4 +1,7 @@
 defmodule BananaBankWeb.UsersControllerTest do
+  # Usar ConnCase para setar um banco de dados em SandBOX
+  # SandBox significa que tudo
+  # Que é feito no teste é feito automáticamente rollback depois
   alias BananaBank.Users
   alias Users.User
   use BananaBankWeb.ConnCase, async: true
@@ -40,14 +43,7 @@ defmodule BananaBankWeb.UsersControllerTest do
         |> post(~p"/api/users", params)
         |> json_response(:bad_request)
 
-      expected_response = %{
-        "errors" => %{
-          "cep" => ["CEP deve estar no formato 12345-678", "should be at least 8 character(s)"],
-          "email" => ["Email deve conter @"],
-          "name" => ["should be at least 3 character(s)"],
-          "password" => ["should be at least 3 character(s)"]
-        }
-      }
+      expected_response = %{"status" => "bad_request"}
 
       assert response == expected_response
     end

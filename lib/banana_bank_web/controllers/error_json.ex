@@ -16,16 +16,11 @@ defmodule BananaBankWeb.ErrorJSON do
     }
   end
 
-
-   def error(%{status: :bad_request}) do
+  def error(%{status: status}) do
     %{
-      status: :bad_request,
-      message: "You make a bad_request!"
+      status: status
     }
   end
-
-
-
 
   defp translate_errors({msg, opts}) do
     Regex.replace(~r"%{(\w+)}", msg, fn _, key ->

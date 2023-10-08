@@ -1,16 +1,21 @@
 defmodule BananaBank.Users.User do
   use Ecto.Schema
   import Ecto.Changeset
+  alias BananaBank.Accounts.Account
 
-  @required_update [:name, :email, :cep]
   @required_create [:name, :password, :email, :cep]
+  @required_update [:name, :email, :cep]
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
   schema "users" do
     field(:cep, :string)
     field(:password_hash)
     field(:name, :string)
     field(:email, :string)
     field(:password, :string, virtual: true)
+
+    has_one :account, Account
 
     timestamps()
   end
@@ -20,6 +25,8 @@ defmodule BananaBank.Users.User do
     |> cast(params, @required_create)
     |> validate_required(@required_create)
     |> do_validations(@required_create)
+    |> cast_assoc(:account, with: &Account.changeset/2)
+    |> unique_constraint(:email)
     |> hash_password()
   end
 
@@ -33,12 +40,12 @@ defmodule BananaBank.Users.User do
   defp do_validations(changeset, fields) do
     changeset
     |> validate_required(fields)
-    |> validate_format(:email, ~r/@/)
     |> validate_length(:cep, min: 8, max: 9)
     |> validate_length(:name, min: 3, max: 100)
     |> validate_length(:email, min: 3, max: 100)
     |> validate_length(:password, min: 3, max: 255)
-    |> validate_length(:cep, is: 8, message: "Cep inválido!" )
+    |> validate_format(:email, ~r/@/, message: "Email deve conter @")
+    |> validate_format(:cep, ~r/^\d{5}-\d{3}$/, message: "CEP deve estar no formato 12345-678")
     |> unique_constraint(:email)
   end
 

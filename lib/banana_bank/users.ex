@@ -10,4 +10,5 @@ defmodule BananaBank.Users do
   defdelegate delete(id), to: Delete, as: :call
   defdelegate create(params), to: Create, as: :call
   defdelegate update(params), to: Update, as: :call
+  defdelegate get_user_by_email(email), to: Get, as: :get_user_by_email
 end
