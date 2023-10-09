@@ -34,7 +34,6 @@ defmodule BananaBank.MixProject do
     [
       {:jason, "~> 1.2"},
       {:tesla, "~> 1.4"},
-      {:guardian, "~> 2.3"},
       {:ecto_sql, "~> 3.10"},
       {:phoenix, "~> 1.7.7"},
       {:postgrex, ">= 0.0.0"},

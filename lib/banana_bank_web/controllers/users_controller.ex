@@ -1,6 +1,7 @@
 defmodule BananaBankWeb.UsersController do
   use BananaBankWeb, :controller
   alias BananaBank.Users
+  alias BananaBankWeb.Token
   alias BananaBank.Users.User
   alias BananaBankWeb.FallbackController
 
@@ -10,6 +11,7 @@ defmodule BananaBankWeb.UsersController do
     users = Users.index()
 
     conn
+    |> put_status(:ok)
     |> render(:index, users: users)
   end
 
@@ -40,6 +42,16 @@ defmodule BananaBankWeb.UsersController do
   def delete(conn, %{"id" => id}) do
     with {:ok, %User{}} <- Users.delete(id) do
       send_resp(conn, :no_content, "")
+    end
+  end
+
+  def login(conn, params) do
+    with {:ok, %User{} = user} <- Users.login(params) do
+      token = Token.sign(user)
+
+      conn
+      |> put_status(:ok)
+      |> render(:login, token: token)
     end
   end
 end

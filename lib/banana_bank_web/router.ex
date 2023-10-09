@@ -5,11 +5,24 @@ defmodule BananaBankWeb.Router do
     plug(:accepts, ["json"])
   end
 
-  scope "/api", BananaBankWeb do
-    pipe_through(:api)
+  pipeline :auth do
+    plug BananaBankWeb.Plugs.Auth
+  end
 
-    resources("/users", UsersController, only: [:create, :update, :show, :delete, :index])
+  scope "/api", BananaBankWeb do
+    pipe_through :api
+
+    resources "/users", UsersController, only: [:create]
+    post "/users/login", UsersController, :login
+  end
+
+  scope "/api", BananaBankWeb do
+    pipe_through [:api, :auth]
+
+    resources "/users", UsersController, only: [:update, :delete, :show, :index]
+
     post "/accounts", AccountsController, :create
+    post "/accounts/transaction", AccountsController, :transaction
   end
 
   # Enable LiveDashboard in development

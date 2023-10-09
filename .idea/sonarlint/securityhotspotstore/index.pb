@@ -267,3 +267,5 @@ S
 #lib/banana_bank/accounts/account.ex,6\9\69006c9069409463bd55a3c5186167c4e80477fc
 W
 'lib/banana_bank/accounts/transaction.ex,d\c\dc26b9bdc512bc072ccc1013ce04a61540d9434b
+O
+lib/banana_bank/users/verify.ex,1\d\1d877cf8f9ae49193c201400752b2d4b77f5018f
